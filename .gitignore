@@ -1,3 +1,4 @@
 /node_modules/*
 /public/*
 /.VSCodeCounter/*
+package-lock.json
