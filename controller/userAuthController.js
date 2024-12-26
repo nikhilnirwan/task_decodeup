@@ -167,7 +167,7 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
   const user = req.user;
   const data = await User.findOne({ _id: user._id });
 
-  res.message = "User successfully get profile.";
+  res.message = "User successfully get profile data.";
   return util.successResponse(data, res);
 });
 
@@ -175,14 +175,14 @@ exports.getUserProfile = catchAsync(async (req, res, next) => {
 exports.getUserProfileRegex = catchAsync(async (req, res, next) => {
   const search = req.body.search;
   const data = await User.find(search);
-  res.message = "Data fetch successfully.";
+  res.message = "User successfully get profile data.";
   return util.successResponse(data, res);
 });
 
 // get all user
 exports.getAllUser = catchAsync(async (req, res, next) => {
   const data = await User.paginate(req.body.query, req.body.options);
-  res.message = "Data fetch successfully.";
+  res.message = "User successfully get all data.";
   return util.successResponse(data.data, res);
 });
 
@@ -193,7 +193,7 @@ exports.updateUser = catchAsync(async (req, res, next) => {
     req.body.password = await encryptPassword.hashPassword(req.body.password);
   }
   const updateDetail = await User.findByIdAndUpdate({ _id: user._id }, { ...req.body }, { upsert: true, new: true });
-  res.message = "User details update Successfully.";
+  res.message = "User details update successfully.";
   return util.successResponse(updateDetail, res);
 });
 
