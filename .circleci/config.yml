@@ -13,26 +13,16 @@ jobs:
           name: Build the Application
           command: npm run dev
 
-  # deploy:
-  #   docker:
-  #     - image: circleci/node:15  # Node.js Docker image for deployment
-  #   steps:
-  #     - checkout
-  #     - run:
-  #         name: Install SSH and rsync
-  #         command: |
-  #           sudo apt-get update
-  #           sudo apt-get install -y rsync openssh-client
-  #     - run:
-  #         name: Deploy to EC2 (multiple apps)
-  #         command: |
-  #           # Sync files to the EC2 instance (replace with actual path)
-  #           rsync -avz --delete ./dist/ ec2-user@<YOUR_PUBLIC_IP>:/path/to/your/app/
-
-  #           # SSH into EC2 and restart applications with PM2 by name
-  #           ssh ec2-user@<YOUR_PUBLIC_IP> "pm2 restart app1"
-  #           ssh ec2-user@<YOUR_PUBLIC_IP> "pm2 restart app2"
-  #           ssh ec2-user@<YOUR_PUBLIC_IP> "pm2 restart app3"
+  deploy:
+    docker:
+      - image: circleci/node:15  # Node.js Docker image for deployment
+    steps:
+      - checkout
+      - run:
+          name: Install SSH and rsync
+          command: |
+            sudo apt-get update
+            
 
 workflows:
   version: 2
@@ -42,3 +32,11 @@ workflows:
       # - deploy:
       #     requires:
       #       - build
+  staging_pipeline:  # New workflow for staging branch
+    when: always
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - staging  # Trigger on staging branch
