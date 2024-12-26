@@ -16,7 +16,7 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  const message = "Hello word";
+  const message = "Hello word with test autorun cicd pipeline";
   res.send({ message });
 });
 
