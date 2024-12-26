@@ -33,7 +33,7 @@ workflows:
       #     requires:
       #       - build
   staging_pipeline:  # New workflow for staging branch
-    when: always
+    when: true
     jobs:
       - build:
           filters:
