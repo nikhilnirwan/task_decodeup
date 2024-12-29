@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/node:15 # Use Node.js 19 Docker image
+      - image: circleci/node:16 # Use Node.js 19 Docker image
     steps:
       - checkout
       - run:
@@ -13,26 +13,12 @@ jobs:
           name: Build the Application
           command: npm run dev
 
-  deploy:
-    docker:
-      - image: circleci/node:15  # Node.js Docker image for deployment
-    steps:
-      - checkout
-      - run:
-          name: Deploy to Staging
-          command: |
-            echo "Deploying to staging environment..."
-            # Add your deployment commands here
-
 workflows:
   version: 2
   build_and_deploy:
     jobs:
-      - build
-      - deploy:
-          requires:
-            - build
+      - build:
           filters:
             branches:
               only:
-                - staging  # Trigger on staging branch
+                - staging
