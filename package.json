@@ -5,8 +5,8 @@
   "main": "sever.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "node index.js",
+    "start": "nodemon index.js",
     "prd": "node index.js",
     "delete": "node helpers/deleteDb.js"
   },
